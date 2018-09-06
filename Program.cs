@@ -8,12 +8,12 @@ namespace WebApi
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            BuildWebHost(args).Run(); //levanta el servidor
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
+                .UseStartup<Startup>() //utilizo esto para arracancar el host
                 .UseUrls("http://localhost:4000")
                 .Build();
     }

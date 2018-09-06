@@ -30,8 +30,9 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            var connectionString = Configuration.GetConnectionString("UserDataContext");
+            var connectionString = Configuration.GetConnectionString("armariDataContext");
             services.AddEntityFrameworkNpgsql().AddDbContext<UserDataContext>(options => options.UseNpgsql(connectionString));
+            services.AddEntityFrameworkNpgsql().AddDbContext<ToolDataContext>(options => options.UseNpgsql(connectionString));
             //services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("TestDb"));
             services.AddMvc();
             services.AddAutoMapper();
@@ -78,6 +79,7 @@ namespace WebApi
 
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IToolService, ToolService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -34,7 +34,7 @@ namespace WebApi.Controllers
             _appSettings = appSettings.Value;
         }
 
-        [HttpGet]
+        [HttpGet]     
         public IActionResult GetAll()
         {
             var tools =  _toolService.getAll();
