@@ -8,20 +8,36 @@ namespace WebApi.Services
 {
     public interface IToolService
     {
-        IEnumerable<Tool> getAll();
+        IList<Tool> getAll();
     }
 
     public class ToolService : IToolService
     {
         private ToolDataContext _context;
-        public ToolService(ToolDataContext context)
+        private IResourceService _resourceService;
+
+        public ToolService(IResourceService resourceService, ToolDataContext context)
         {
             _context = context;
+            _resourceService = resourceService;
         }
 
-        public IEnumerable<Tool> getAll()
+        public IList<Tool> getAll()
         {
-            return _context.Tools;
+            var toolsWithoutLinks = _context.Tools;
+
+            foreach(var tool in toolsWithoutLinks)
+            {
+                tool.Links = _resourceService.AddLinks(tool.Id).ToList();
+            }
+
+            return toolsWithoutLinks.ToList();
         }
+
+        /* public Tool GetToolById(int id)
+        {
+                //todo refactor
+        }
+*/
     }
 }
