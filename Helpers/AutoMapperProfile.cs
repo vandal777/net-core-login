@@ -8,12 +8,12 @@ namespace WebApi.Helpers
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, UserDto>();
-            CreateMap<UserDto, User>();
-            CreateMap<Tool, ToolDto>();
-            CreateMap<ToolDto, Tool>();
-            CreateMap<Resource, ResourceDto>();
-            CreateMap<ResourceDto, Resource>();
+            CreateMap<UserEntity, UserDto>();
+            CreateMap<UserDto, UserEntity>();
+            CreateMap<ToolEntity, ToolDto>();
+            CreateMap<ToolDto, ToolEntity>();
+            CreateMap<ResourceEntity, ResourceDto>();
+            CreateMap<ResourceDto, ResourceEntity>();
         }
     }
 }

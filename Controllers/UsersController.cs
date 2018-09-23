@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Authorization;
 using WebApi.Services;
 using WebApi.Dtos;
 using WebApi.Entities;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebApi.Controllers
 {
@@ -63,7 +65,8 @@ namespace WebApi.Controllers
                 Username = user.Username,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Token = tokenString
+                Token = tokenString, 
+                Roles = user.Roles
             });
         }
 
@@ -72,7 +75,7 @@ namespace WebApi.Controllers
         public IActionResult Register([FromBody]UserDto userDto)
         {
             // map dto to entity
-            var user = _mapper.Map<User>(userDto);
+            var user = _mapper.Map<UserEntity>(userDto);
 
             try 
             {
@@ -107,7 +110,7 @@ namespace WebApi.Controllers
         public IActionResult Update(int id, [FromBody]UserDto userDto)
         {
             // map dto to entity and set id
-            var user = _mapper.Map<User>(userDto);
+            var user = _mapper.Map<UserEntity>(userDto);
             user.Id = id;
 
             try 

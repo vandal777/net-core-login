@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebApi.Dtos;
 using WebApi.Entities;
 using WebApi.Helpers;
 
@@ -8,11 +9,11 @@ namespace WebApi.Services
 {
     public interface IUserService
     {
-        User Authenticate(string username, string password);
-        IEnumerable<User> GetAll();
-        User GetById(int id);
-        User Create(User user, string password);
-        void Update(User user, string password = null);
+        UserEntity Authenticate(string username, string password);
+        IEnumerable<UserEntity> GetAll();
+        UserEntity GetById(int id);
+        UserEntity Create(UserEntity user, string password, string roleName = "user");
+        void Update(UserEntity user, string password = null);
         void Delete(int id);
     }
 
@@ -25,7 +26,7 @@ namespace WebApi.Services
             _context = context;
         }
 
-        public User Authenticate(string username, string password)
+        public UserEntity Authenticate(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return null;
@@ -46,19 +47,18 @@ namespace WebApi.Services
             return user;
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<UserEntity> GetAll()
         {
             return _context.Users;
         }
 
-        public User GetById(int id)
+        public UserEntity GetById(int id)
         {
             return _context.Users.Find(id);
         }
 
-        public User Create(User user, string password)
+        public UserEntity Create(UserEntity user, string password, string userRole = "user")
         {
-            // validation
             if (string.IsNullOrWhiteSpace(password))
                 throw new AppException("Password is required");
 
@@ -70,6 +70,7 @@ namespace WebApi.Services
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            user.Roles.Add(userRole);
 
             _context.Users.Add(user);
             _context.SaveChanges();
@@ -77,7 +78,7 @@ namespace WebApi.Services
             return user;
         }
 
-        public void Update(User userParam, string password = null)
+        public void Update(UserEntity userParam, string password = null)
         {
             var user = _context.Users.Find(userParam.Id);
 
@@ -151,6 +152,13 @@ namespace WebApi.Services
             }
 
             return true;
+        }
+
+        public void UserAddToRole(UserEntity user, string roleName)
+        {
+            user.Roles.Add(roleName);
+            _context.Users.Update(user);
+            _context.SaveChanges();
         }
     }
 }

@@ -56,7 +56,7 @@ namespace WebApi.Services
 
         public ToolDto AddTool(ToolDto toolDto)
         {
-            var tool = new Tool 
+            var tool = new ToolEntity 
             {
                 Name = toolDto.Name,
                 Description = toolDto.Description,

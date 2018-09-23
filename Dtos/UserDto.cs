@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace WebApi.Dtos
 {
     public class UserDto
@@ -7,5 +9,7 @@ namespace WebApi.Dtos
         public string LastName { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public List<string> Roles { get; set; }
+
     }
 }

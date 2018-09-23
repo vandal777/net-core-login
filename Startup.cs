@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,7 +12,8 @@ using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Options;
+using System;
+using WebApi.Dtos;
 
 namespace WebApi
 {
@@ -33,7 +33,6 @@ namespace WebApi
             var connectionString = Configuration.GetConnectionString("armariDataContext");
             services.AddEntityFrameworkNpgsql().AddDbContext<UserDataContext>(options => options.UseNpgsql(connectionString));
             services.AddEntityFrameworkNpgsql().AddDbContext<ToolDataContext>(options => options.UseNpgsql(connectionString));
-            //services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("TestDb"));
 
             services.AddMvc();
             services.AddAutoMapper();
@@ -61,7 +60,6 @@ namespace WebApi
                         var user = userService.GetById(userId);
                         if (user == null)
                         {
-                            // return unauthorized if user no longer exists
                             context.Fail("Unauthorized");
                         }
                         return Task.CompletedTask;
@@ -80,6 +78,7 @@ namespace WebApi
 
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IResourceService, ResourceService>();
             services.AddScoped<IToolService, ToolService>();            
         }

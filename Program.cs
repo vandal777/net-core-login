@@ -8,7 +8,7 @@ namespace WebApi
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run(); //levanta el servidor
+            BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

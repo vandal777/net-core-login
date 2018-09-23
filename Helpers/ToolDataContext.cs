@@ -11,7 +11,7 @@ public class ToolDataContext : DbContext
 
     public ToolDataContext(DbContextOptions<ToolDataContext> options) : base(options) { }
 
-    public DbSet<Tool> Tools { get; set; }
+    public DbSet<ToolEntity> Tools { get; set; }
 
-    public DbSet<Resource> Resources { get; set; }
+    public DbSet<ResourceEntity> Resources { get; set; }
 }

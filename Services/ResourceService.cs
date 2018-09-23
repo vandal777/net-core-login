@@ -10,7 +10,7 @@ namespace WebApi.Services
     {
         IEnumerable<string> GetLinks(int id);
 
-        Resource AddResource(int idTool, string link);
+        ResourceEntity AddResource(int idTool, string link);
     }
 
     public class ResourceService : IResourceService
@@ -26,16 +26,16 @@ namespace WebApi.Services
             return GetResourceById(id).Select(x => x.Link).ToList();          
         }
 
-        public Resource AddResource(int idTool, string link)
+        public ResourceEntity AddResource(int idTool, string link)
         {
-            var resource = new Resource { IdTool = idTool, Link = link };
+            var resource = new ResourceEntity { IdTool = idTool, Link = link };
             _context.Resources.Add(resource);
             _context.SaveChanges();
             return resource;
         }
 
 
-        private IQueryable<Resource> GetResourceById(int id)
+        private IQueryable<ResourceEntity> GetResourceById(int id)
         {
             return _context.Resources.Where(x => x.IdTool == id);
         }

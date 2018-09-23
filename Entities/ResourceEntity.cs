@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WebApi.Entities
 
 {
-    public class Resource
+    public class ResourceEntity
     {
         public int Id { get; set; }
         public string Link { get; set;} 

@@ -11,5 +11,8 @@ public class UserDataContext : DbContext
 
     public UserDataContext(DbContextOptions<UserDataContext> options) : base(options) { }
 
-    public DbSet<User> Users { get; set; } 
+    public DbSet<UserEntity> Users { get; set; } 
+
+    public DbSet<RoleEntity> Roles { get; set; }
+
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace WebApi.Entities
 
 {
-    public class Tool
+    public class ToolEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
