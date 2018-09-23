@@ -8,7 +8,9 @@ namespace WebApi.Services
 {
     public interface IResourceService
     {
-        IEnumerable<string> AddLinks(int id);
+        IEnumerable<string> GetLinks(int id);
+
+        Resource AddResource(int idTool, string link);
     }
 
     public class ResourceService : IResourceService
@@ -19,10 +21,19 @@ namespace WebApi.Services
             _context = context;
         }
 
-        public IEnumerable<string> AddLinks(int id)
+        public IEnumerable<string> GetLinks(int id)
         {
             return GetResourceById(id).Select(x => x.Link).ToList();          
         }
+
+        public Resource AddResource(int idTool, string link)
+        {
+            var resource = new Resource { IdTool = idTool, Link = link };
+            _context.Resources.Add(resource);
+            _context.SaveChanges();
+            return resource;
+        }
+
 
         private IQueryable<Resource> GetResourceById(int id)
         {

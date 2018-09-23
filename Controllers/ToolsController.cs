@@ -37,9 +37,15 @@ namespace WebApi.Controllers
         [HttpGet]     
         public IActionResult GetAll()
         {
-            var tools =  _toolService.getAll();
+            var tools =  _toolService.GetAll();
             var toolDtos = _mapper.Map<IList<ToolDto>>(tools);
             return Ok(toolDtos);
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add(ToolDto toolDto)
+        {
+            return Ok(_toolService.AddTool(toolDto));
         }
     }
 }
