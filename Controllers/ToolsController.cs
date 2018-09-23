@@ -45,7 +45,6 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult Add(ToolDto toolDto)
         {
-            
             return Ok(_toolService.AddTool(toolDto));
         }
 

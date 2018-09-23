@@ -70,7 +70,7 @@ namespace WebApi.Services
             {
                 _resourceService.AddResource(tool.Id, link);
             }
-
+            toolsDTO.Add(toolDto);
             return toolDto;
         }      
 
