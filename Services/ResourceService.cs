@@ -15,8 +15,8 @@ namespace WebApi.Services
 
     public class ResourceService : IResourceService
     {
-        private ResourceDataContext _context;
-        public ResourceService(ResourceDataContext context)
+        private ToolDataContext _context;
+        public ResourceService(ToolDataContext context)
         {
             _context = context;
         }

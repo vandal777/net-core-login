@@ -42,10 +42,22 @@ namespace WebApi.Controllers
             return Ok(toolDtos);
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public IActionResult Add(ToolDto toolDto)
         {
             return Ok(_toolService.AddTool(toolDto));
+        }
+
+        [HttpPut]
+        public IActionResult Update(ToolDto toolDto)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpDelete]
+        public IActionResult Remove(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

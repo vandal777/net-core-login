@@ -33,9 +33,8 @@ namespace WebApi
             var connectionString = Configuration.GetConnectionString("armariDataContext");
             services.AddEntityFrameworkNpgsql().AddDbContext<UserDataContext>(options => options.UseNpgsql(connectionString));
             services.AddEntityFrameworkNpgsql().AddDbContext<ToolDataContext>(options => options.UseNpgsql(connectionString));
-            services.AddEntityFrameworkNpgsql().AddDbContext<ResourceDataContext>(options => options.UseNpgsql(connectionString));
-
             //services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("TestDb"));
+
             services.AddMvc();
             services.AddAutoMapper();
 
@@ -101,6 +100,7 @@ namespace WebApi
             app.UseAuthentication();
 
             app.UseMvc();
+
         }
     }
 }

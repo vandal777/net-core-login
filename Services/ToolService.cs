@@ -20,7 +20,7 @@ namespace WebApi.Services
         private ToolDataContext _context;
         private IResourceService _resourceService;
 
-        private List<ToolDto> toolsDTO = new List<ToolDto>();
+        private static List<ToolDto> toolsDTO = new List<ToolDto>();
 
 
         public ToolService(IResourceService resourceService, ToolDataContext context)
@@ -40,7 +40,6 @@ namespace WebApi.Services
                     .Add(
                         new ToolDto
                         {
-                            Id = tool.Id,
                             Description = tool.Description,
                             Name = tool.Name,
                             Title = tool.Title, 
@@ -59,20 +58,18 @@ namespace WebApi.Services
         {
             var tool = new Tool 
             {
-                Id = toolDto.Id,
                 Name = toolDto.Name,
                 Description = toolDto.Description,
                 Title = toolDto.Title
             };         
 
             _context.Tools.Add(tool);
+            _context.SaveChanges();
 
             foreach(var link in toolDto.Links)
             {
                 _resourceService.AddResource(tool.Id, link);
             }
-
-            _context.SaveChanges();
 
             return toolDto;
         }      
